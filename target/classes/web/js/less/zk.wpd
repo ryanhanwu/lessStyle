@@ -1,3 +1,0 @@
-<package name="less" language="xul/html" depends="zul.utl">
-	<widget name="LessStyle"/>
-</package>
