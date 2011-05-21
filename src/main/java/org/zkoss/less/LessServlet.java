@@ -1,4 +1,4 @@
-package org.zkoss.less.servlet;
+package org.zkoss.less;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,7 +25,6 @@ import com.yahoo.platform.yui.compressor.CssCompressor;
 public class LessServlet extends HttpServlet {
 	protected int maxAge = 31556926;
 	protected long milliseconds = 1000L;
-	private static String lessPath;
 	private static ServletContext sc;
 	private static String lessSrc;
 
@@ -33,7 +32,6 @@ public class LessServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		lessSrc = config.getInitParameter(LessStyle.LESS_RESOURCE);
 		sc = config.getServletContext();
-		lessPath = sc.getRealPath(lessSrc);
 		try {
 			initializeLess(lessSrc);
 		} catch (Exception e) {
@@ -45,8 +43,7 @@ public class LessServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
 		try {
-			File lessCSS = new File(lessPath + request.getRequestURI().replaceAll(lessSrc, "").replaceAll("/+", "/")
-					+ ".css");
+			File lessCSS = new File(sc.getRealPath(lessSrc + request.getPathInfo().replaceAll("/+", "/") + ".css"));
 			byte[] content = readBinaryFile(lessCSS);
 
 			long ifModifiedSince = request.getDateHeader("If-Modified-Since");
