@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by ZK Studio -->
+
+<zk>
+	<library-property>
+		<name>org.zkoss.less.LessDebug</name>
+		<value>true</value>
+	</library-property>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/timeout.zul</timeout-uri>
+	</device-config>
+</zk>

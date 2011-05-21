@@ -1,0 +1,40 @@
+@shadow-config: 0px 0px 6px black;
+.shadow {
+	-moz-box-shadow: @shadow-config;
+	-webkit-box-shadow: @shadow-config; 
+	box-shadow: @shadow-config;
+}
+@base-height: 30px;
+@base-width: 300px;
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+.less-root { 
+	.container-0 {
+		color: white;
+		height: @base-height;
+		background: @nice-blue - #333; /*Dark Blue*/
+		width: @base-width / 2;
+	}
+	.container-1 {
+		.child-1 {
+			color: yellow;
+		}
+		height: @base-height;
+		color: @nice-blue;
+		background: red;
+		width: @base-width;
+	}
+	.container-2 {
+		.child-2 {
+			font-weight: bold;
+			color: green;
+		}
+		.child-3 {
+			.shadow;
+		}
+		height: @base-height*2;
+		color: @light-blue;
+		background: yellow;
+		width: @base-width + 123;	
+	}
+}
