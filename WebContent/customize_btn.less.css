@@ -50,12 +50,6 @@ span.z-button {
   display: inline-block;
   margin: 1px 1px 0 0;
 }
-.z-button-disd {
-  color: gray;
-  cursor: default;
-  opacity: .6;
-  -moz-opacity: .6;
-}
 .z-button .z-button-tl,
 .z-button .z-button-tr,
 .z-button .z-button-bl,
@@ -178,4 +172,10 @@ span.z-button {
 .z-button-clk .z-button-cm {
   background-position: 0 -1500px;
   padding: 0 6px 0 8px;
+}
+.z-button-disd {
+  color: gray;
+  cursor: default;
+  opacity: .6;
+  -moz-opacity: .6;
 }
