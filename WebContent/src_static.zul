@@ -1,0 +1,21 @@
+<zk>
+	Src
+	<div sclass="less-root">
+		<div sclass="container-0">
+			<label sclass="child-1">Child 1</label>
+			<label sclass="child-2">Child 2</label>
+		</div>
+		<div sclass="container-1">
+			<label sclass="child-1">Child 1</label>
+			<label sclass="child-2">Child 2</label>
+		</div>
+		<div sclass="container-2">
+			<label sclass="child-1">Child 1</label>
+			<label sclass="child-2">Child 2</label>
+			<label sclass="child-3">Child 3</label>
+		</div>
+	</div>
+	<lessStyle src="testD.less" />
+	<lessStyle mode="static" src="test.less" recompile="true"
+		serviceURI="/less/" />
+</zk>
