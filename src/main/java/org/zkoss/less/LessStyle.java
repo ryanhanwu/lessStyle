@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.zkoss.lang.Library;
 import org.zkoss.lang.Objects;
 import org.zkoss.less.util.LessZUtil;
 import org.zkoss.zk.ui.Desktop;
@@ -17,24 +16,41 @@ import com.asual.lesscss.LessException;
 
 public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 	public static final String LESS_RESOURCE = "org.zkoss.less.LessResource";
-	public static final String LESS_DEBUG = "org.zkoss.less.LessDebug";
+	public static final String LESS_MODE_INSTANT = "instant";
+
 	private String _src;
-	/** _src and _content cannot be nonnull at the same time. */
 	private String _content;
 	private String _media;
-	/** Count the version of {@link #_content}. */
 	private byte _cntver;
-	private boolean recompile = true;
+	private boolean _recompile = true;
+	private String _mode = LESS_MODE_INSTANT;
+	private String _serviceURI = "/less/";
+
+	public LessStyle() {
+	}
 
 	public boolean isRecompile() {
-		return recompile;
+		return _recompile;
 	}
 
 	public void setRecompile(boolean reCompile) {
-		this.recompile = reCompile;
+		this._recompile = reCompile;
 	}
 
-	public LessStyle() {
+	public String getMode() {
+		return _mode;
+	}
+
+	public void setMode(String mode) {
+		this._mode = mode;
+	}
+
+	public String getServiceURI() {
+		return this._serviceURI;
+	};
+
+	public void setServiceURI(String uri) {
+		this._serviceURI = uri;
 	}
 
 	public String getSrc() {
@@ -51,11 +67,10 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 			throw new UnsupportedOperationException("LessStyle can only compile file end with .less");
 
 		if (_content != null || !Objects.equals(_src, src)) {
-			String debug = Library.getProperty(LESS_DEBUG);
-			if (Boolean.valueOf(debug)) {
+			if (getMode().equals(LESS_MODE_INSTANT)) {
 				try {
 					String path = Executions.getCurrent().getDesktop().getWebApp().getRealPath(src);
-					if (!new File(path + ".css").exists() || recompile)
+					if (!new File(path + ".css").exists() || _recompile)
 						LessZUtil.compileLessFile(path);
 					;
 				} catch (LessException e) {
@@ -65,8 +80,7 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 				}
 				_src = src + ".css";
 			} else {
-				// Get Resource From Less Service
-				_src = "/less/" + src;
+				_src = getServiceURI() + src;
 			}
 			_content = null;
 			smartUpdate("src", new EncodedURL());
@@ -103,13 +117,10 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 			_src = null;
 			++_cntver;
 			smartUpdate("src", new EncodedURL());
-			// AU: always uses src to solve IE/Chrome/... issue
 		}
 	}
 
 	protected void renderProperties(org.zkoss.zk.ui.sys.ContentRenderer renderer) throws java.io.IOException {
-		super.renderProperties(renderer);
-
 		boolean gened = false;
 		final String cnt = getContent();
 		// allow derive to override getContent()
@@ -159,4 +170,5 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 			return getEncodedURL();
 		}
 	}
+
 }
