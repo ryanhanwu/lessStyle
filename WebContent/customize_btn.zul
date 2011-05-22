@@ -1,0 +1,6 @@
+<zk>
+	<div sclass="container">
+		<button label="test1" sclass="test2" mold="trendy" />
+	</div>
+	<lessStyle src="customize_btn.less" />
+</zk>

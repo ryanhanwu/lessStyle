@@ -1,4 +1,41 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <zk>
-	<a href="src.zul">src</a>
-	<a href="content.zul">Content</a>
+	<zscript><![CDATA[
+	import java.util.*;
+	import java.io.*;
+	javax.servlet.ServletRequest req = (javax.servlet.ServletRequest) execution.getNativeRequest(); 
+	String curPath = req.getRealPath(req.getServletPath());
+	File root = new File(curPath);
+	if (root.isFile()) {
+		root = root.getParentFile();
+	}
+	File[] fs = root.listFiles(new FileFilter() {
+		public boolean accept(File f) {
+			return f.getName().endsWith(".zul") && !f.getName().startsWith("index");
+		}
+	});
+	
+	java.util.Arrays.sort(fs, new java.util.Comparator() {
+		public int compare(Object a, Object b) {
+			File fa = (File) a;
+			File fb = (File) b;
+			if (fa.lastModified() > fb.lastModified())
+				return -1;
+			else if (fa.lastModified() < fb.lastModified())
+				return 1;
+			else
+				return 0;
+		}
+	});
+]]></zscript>
+	<grid width="300px" model="@{fs}">
+		<columns>
+			<column>Files</column>
+		</columns>
+		<rows>
+			<row self="@{each=File}">
+				<a href="@{File.name}" label="@{File.name}" />
+			</row>
+		</rows>
+	</grid>
 </zk>

@@ -1,0 +1,202 @@
+@au-url : "/zkau/web/zul/img/breeze";  
+@corner-img: %("%s/button/btn-corner.gif", @au-url);
+@btn-x: %("%s/button/btn-x.gif", @au-url);
+@btn-y: %("%s/button/btn-y.gif", @au-url);
+@btn-ctr: %("%s/button/btn-ctr.gif", @au-url);
+@font-family: arial,sans-serif;
+@font-size: 12px;
+@btn-corner-size: 4px;
+@btn-corner-size-position: @btn-corner-size*-1;
+@btn-middle-size: -500px;
+@btn-middle-padding: 7px;
+
+#breeze-config {
+	font-family: @font-family;
+	font-size: @font-size;
+	color: black;
+	cursor: pointer;
+	white-space: nowrap;
+}
+.z-button {
+	.z-button-cr * { /*IE6*/
+		display: block; 
+		width: @btn-corner-size !important; 
+		overflow: hidden;
+		font-size: 0 !important;
+		line-height: 0 !important;
+	}
+	tr td {
+		#breeze-config;
+	}
+	#breeze-config;
+}
+.z-button-os {
+	font-family: @font-family;
+	font-size: @font-size; 
+	font-weight: normal;
+}
+
+button.z-button {
+	padding:0 !important; 
+	margin:0 !important; 
+	border:0 !important;
+	background: transparent !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	width: @btn-corner-size !important;
+	/*height: ${c:isGecko()? 0 : 1}px !important;*/
+}
+span.z-button {
+	display: -moz-inline-box; 
+	vertical-align: bottom; 
+	display: inline-block;
+	margin: 1px 1px 0 0;
+}
+.z-button-disd {
+	color: gray; 
+	cursor: default; 
+	opacity: .6; 
+	-moz-opacity: .6;
+}
+.z-button {
+	.z-button-tl,
+	.z-button-tr,
+	.z-button-bl,
+	.z-button-br {
+		background-image: url(@corner-img);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		width: @btn-corner-size;
+		padding: 0;
+		margin: 0;
+	}
+	.z-button-tr,
+	.z-button-cr {
+		background-position: @btn-corner-size-position*1 0;
+	}
+	.z-button-tl,
+	.z-button-tr {
+		height: @btn-corner-size;
+	}
+	.z-button-tm,
+	.z-button-bm {
+		background-image: url(@btn-x);
+	}
+	.z-button-cl,
+	.z-button-cr {
+		background-image: url(@btn-y);
+	}
+	.z-button-cm {
+		background-image: url(@btn-ctr);
+	}
+	.z-button-cl {
+		text-align: right;
+	}
+	.z-button-bl,
+	.z-button-br {
+		width: @btn-corner-size;
+		height: @btn-corner-size;
+		padding: 0;
+		margin: 0;
+		background-repeat: no-repeat;
+		background-position: 0 @btn-corner-size-position*1;
+	}
+	.z-button-br {
+		background-position: @btn-corner-size-position*1 @btn-corner-size-position*1;
+	}
+	.z-button-tm {
+		background-repeat: repeat-x;
+		background-position: 0 0;
+	}
+	.z-button-bm {
+		height: @btn-corner-size;
+		background-repeat: repeat-x;
+		background-position: 0 @btn-corner-size-position*1;
+	}
+	.z-button-cm {
+		margin: 0; overflow: hidden;
+		vertical-align: middle;
+		text-align: center;
+		padding: 0 @btn-middle-padding;
+		background-repeat: repeat-x;
+		background-position: 0 0;
+		white-space: nowrap;
+	}
+}
+.z-button-focus {
+	.z-button-tl,
+	.z-button-cl {
+		background-position: @btn-corner-size-position*4 0;
+	}
+	.z-button-tr,
+	.z-button-cr {
+		background-position: @btn-corner-size-position*5 0;
+	}
+	.z-button-bl {
+		background-position: @btn-corner-size-position*4 @btn-corner-size-position*1;
+	}
+	.z-button-br {
+		background-position: @btn-corner-size-position*5 @btn-corner-size-position*1;
+	}
+	.z-button-tm {
+		background-position: 0 @btn-corner-size-position*4;
+	}
+	.z-button-bm {
+		background-position: 0 @btn-corner-size-position*5;
+	}
+	.z-button-cm {
+		background-position: 0 @btn-middle-size*2;
+	}
+}
+.z-button-over {
+	.z-button-tl,
+	.z-button-cl {
+		background-position: @btn-corner-size-position*2 0;
+	}
+	.z-button-tr,
+	.z-button-cr {
+		background-position: @btn-corner-size-position*3 0;
+	}
+	.z-button-bl {
+		background-position: @btn-corner-size-position*2 @btn-corner-size-position;
+	}
+ 	.z-button-br {
+		background-position: @btn-corner-size-position*3 @btn-corner-size-position;
+	}
+	 .z-button-tm {
+		background-position: 0 @btn-corner-size-position*2;
+	}
+	.z-button-bm {
+		background-position: 0 @btn-corner-size-position*3;
+	}
+	.z-button-cm {
+		background-position: 0 @btn-middle-size;
+	}
+}
+
+.z-button-clk {
+	.z-button-tl,
+	.z-button-cl {
+		background-position: @btn-corner-size-position*6 0;
+	}
+	.z-button-tr,
+	.z-button-cr {
+		background-position: @btn-corner-size-position*7 0;
+	}
+	.z-button-bl {
+		background-position: @btn-corner-size-position*6 @btn-corner-size-position;
+	}
+	.z-button-br {
+		background-position: @btn-corner-size-position*7 @btn-corner-size-position;
+	}
+	.z-button-tm{
+		background-position: 0 @btn-corner-size-position*6;
+	}
+	.z-button-bm {
+		background-position: 0 @btn-corner-size-position*7;
+	}
+	.z-button-cm {
+		background-position: 0 @btn-middle-size*3;
+		padding: 0 @btn-middle-padding - 1 0 @btn-middle-padding + 1;
+	}	
+}
