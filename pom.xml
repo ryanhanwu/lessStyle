@@ -5,7 +5,7 @@
 	<artifactId>lessStyle</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<properties>
-		<zk.version>5.0.7.1</zk.version>
+		<zk.version>5.0.7</zk.version>
 		<zktheme.version>5.0.7</zktheme.version>
 		<zkel.version>1.1.0</zkel.version>
 		<commons-lang.version>2.4</commons-lang.version>

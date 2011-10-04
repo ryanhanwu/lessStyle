@@ -71,7 +71,7 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 				try {
 					String path = Executions.getCurrent().getDesktop().getWebApp().getRealPath(src);
 					if (!new File(path + ".css").exists() || _recompile)
-						LessZUtil.compileLessFile(path);
+						LessZUtil.compileLessFileToCSSFile(path);
 					;
 				} catch (LessException e) {
 					e.printStackTrace();
@@ -110,7 +110,7 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 
 		if (_src != null || !Objects.equals(_content, content)) {
 			try {
-				_content = LessZUtil.compileLessContent(content);
+				_content = LessZUtil.compileLessToString(content);
 			} catch (LessException e) {
 				e.printStackTrace();
 			}

@@ -1,7 +1,0 @@
-.shadow{-moz-box-shadow:0 0 6px black;-webkit-box-shadow:0 0 6px black;box-shadow:0 0 6px black}.less-root .container-0{color:white;height:30px;background:#28507a;width:150px}.less-root .container-1{height:30px;color:#5b83ad;background:red;width:300px}.less-root .container-1 .child-1{color:yellow}.less-root .container-2{height:60px;color:#6c94be;background:yellow;width:423px}.less-root .container-2 .child-2{font-weight:bold;color:green}.less-root .container-2 .child-3{-moz-box-shadow:0 0 6px black;-webkit-box-shadow:0 0 6px black;box-shadow:0 0 6px black};
-}
-.less-root .container-2 .child-3 {
-  -moz-box-shadow: 0px 0px 6px black;
-  -webkit-box-shadow: 0px 0px 6px black;
-  box-shadow: 0px 0px 6px black;
-}
