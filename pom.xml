@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Component</groupId>
 	<artifactId>lessStyle</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<properties>
 		<zk.version>5.0.7</zk.version>
 		<zktheme.version>5.0.7</zktheme.version>

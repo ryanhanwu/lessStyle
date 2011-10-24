@@ -1,15 +1,10 @@
 package org.zkoss.less;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.Iterator;
 
 import javax.servlet.ServletConfig;
@@ -19,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.zkoss.less.util.LessFileUtil;
 import org.zkoss.less.util.LessZUtil;
 
 import com.asual.lesscss.LessException;
@@ -58,17 +54,19 @@ public class LessServlet extends HttpServlet {
 			response.setDateHeader("Expires", System.currentTimeMillis() + maxAge * milliseconds);
 			response.setHeader("Cache-control", "max-age=" + maxAge);
 
-			if (lessCSSFile.exists() && !mode_instant) {// Default Mode
-				content = readFileToBinary(lessCSSFile);
+			if (mode_instant) {
+				content = LessZUtil.compressCSSToString(
+						LessZUtil.compileLessToString(LessFileUtil.readFileToString(requestFileName + ".less")))
+						.getBytes();
+			} else {
+				content = LessFileUtil.readFileToBinary(lessCSSFile);
 				long ifModifiedSince = request.getDateHeader("If-Modified-Since");
 				if (ifModifiedSince != 0 && ifModifiedSince / milliseconds == lessCSSFile.lastModified() / milliseconds) {
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 					return;
 				}
 				response.setDateHeader("Last-Modified", lessCSSFile.lastModified());
-			} else {// Instant Mode
-				content = LessZUtil.compressCSSToString(
-						LessZUtil.compileLessToString(readFileToString(requestFileName + ".less"))).getBytes();
+
 			}
 			response.setContentLength(content.length);
 			response.getOutputStream().write(content);
@@ -80,7 +78,7 @@ public class LessServlet extends HttpServlet {
 		}
 	}
 
-	/** 
+	/**
 	 * Compile .less to .css
 	 * */
 	private void initLess(String lessSrc) throws IOException, LessException {
@@ -100,35 +98,4 @@ public class LessServlet extends HttpServlet {
 		}
 	}
 
-	private static String readFileToString(String filePath) throws IOException {
-		StringBuffer fileData = new StringBuffer(2048);
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		char[] buf = new char[1024];
-		int numRead = 0;
-		while ((numRead = reader.read(buf)) != -1) {
-			String readData = String.valueOf(buf, 0, numRead);
-			fileData.append(readData);
-			buf = new char[1024];
-		}
-		reader.close();
-		return fileData.toString();
-	}
-
-	private static byte[] readFileToBinary(File lessCSS) throws IOException {
-		byte[] result;
-		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-		FileInputStream input = new FileInputStream(lessCSS);
-		try {
-			byte[] buffer = new byte[1024];
-			int bytesRead = -1;
-			while ((bytesRead = input.read(buffer)) != -1) {
-				byteStream.write(buffer, 0, bytesRead);
-			}
-			result = byteStream.toByteArray();
-		} finally {
-			byteStream.close();
-			input.close();
-		}
-		return result;
-	}
 }
