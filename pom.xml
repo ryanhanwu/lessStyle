@@ -5,8 +5,8 @@
 	<artifactId>lessStyle</artifactId>
 	<version>0.1</version>
 	<properties>
-		<zk.version>5.0.7</zk.version>
-		<zktheme.version>5.0.7</zktheme.version>
+		<zk.version>5.0.8</zk.version>
+		<zktheme.version>5.0.8</zktheme.version>
 		<zkel.version>1.1.0</zkel.version>
 		<commons-lang.version>2.4</commons-lang.version>
 		<bsh.version>2.0b4</bsh.version>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.asual.lesscss</groupId>
 			<artifactId>lesscss-engine</artifactId>
-			<version>1.0.43</version>
+			<version>1.1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

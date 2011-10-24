@@ -34,6 +34,10 @@
 			<param-name>org.zkoss.less.LessResource</param-name>
 			<param-value>/WEB-INF/lessSrc</param-value>
 		</init-param>
+		<init-param>
+			<param-name>org.zkoss.less.Instant</param-name>
+			<param-value>1</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>

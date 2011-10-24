@@ -15,5 +15,5 @@
 			<label sclass="child-3">Child 3</label>
 		</div>
 	</div>
-	<lessStyle src="testD.less" />
+	<lessStyle src="test.less" />
 </zk>
