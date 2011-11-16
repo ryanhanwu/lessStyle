@@ -12,6 +12,11 @@ import com.yahoo.platform.yui.compressor.CssCompressor;
 public class LessZUtil {
 	private static LessEngine engine = new LessEngine();
 
+	public static String compileLessFileToCSSFile(File lessFile) throws LessException, IOException {
+		String newPath = lessFile.getPath().replace(".less", ".css");
+		engine.compile(lessFile, new File(newPath));
+		return newPath;
+	}
 	public static String compileLessFileToCSSFile(String filePath) throws LessException, IOException {
 		String newPath = filePath.replace(".less", ".css");
 		engine.compile(new File(filePath), new File(newPath));
