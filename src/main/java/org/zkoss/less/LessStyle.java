@@ -15,15 +15,16 @@ import org.zkoss.zul.impl.Utils;
 import com.asual.lesscss.LessException;
 
 public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
-	public static final String LESS_RESOURCE = "org.zkoss.less.LessResource";
-	public static final String LESS_MODE_INSTANT = "instant";
+	public static final String LESSRESOURCE = "org.zkoss.less.LessResource";
+	public static final String LESSMODEINSTANT = "instant";
+	public static final String LESSMODESTATIC = "static";
 
 	private String _src;
 	private String _content;
 	private String _media;
 	private byte _cntver;
 	private boolean _recompile = true;
-	private String _mode = LESS_MODE_INSTANT;
+	private String _mode = LESSMODEINSTANT;
 	private String _serviceURI = "/less/";
 
 	public LessStyle() {
@@ -67,18 +68,19 @@ public class LessStyle extends Style implements org.zkoss.less.api.LessStyle {
 			throw new UnsupportedOperationException("LessStyle can only compile file end with .less");
 
 		if (_content != null || !Objects.equals(_src, src)) {
-			if (getMode().equals(LESS_MODE_INSTANT)) {
+			if (_mode.equals(LESSMODEINSTANT)) {
 				try {
 					String path = Executions.getCurrent().getDesktop().getWebApp().getRealPath(src);
 					if (!new File(path + ".css").exists() || _recompile)
 						LessZUtil.compileLessFileToCSSFile(path);
-					;
 				} catch (LessException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				_src = src + ".css";
+				_src = src.replace(".less", ".css");
+			} else if (_mode.equals(LESSMODESTATIC)) {
+				_src = getServiceURI() + src.replace(".less", "");
 			} else {
 				_src = getServiceURI() + src;
 			}

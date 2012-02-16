@@ -15,7 +15,5 @@
 			<label sclass="child-3">Child 3</label>
 		</div>
 	</div>
-	<lessStyle src="testD.less" />
-	<lessStyle mode="static" src="test.less" recompile="true"
-		serviceURI="/less/" />
+	<lessStyle mode="static" src="test.less" serviceURI="/less/" /> 
 </zk>

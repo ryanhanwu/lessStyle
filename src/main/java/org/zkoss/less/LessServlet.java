@@ -37,7 +37,7 @@ public class LessServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		lessResource = config.getInitParameter(LessStyle.LESS_RESOURCE);
+		lessResource = config.getInitParameter(LessStyle.LESSRESOURCE);
 		mode_instant = config.getInitParameter(INSTANT) != null;
 		sc = config.getServletContext();
 		try {
